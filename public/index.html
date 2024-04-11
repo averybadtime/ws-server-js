@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.io</title>
+</head>
+<body>
+  <h3>Probando App Con Socket.io</h3>
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum quia nostrum aliquam sed? Temporibus commodi soluta illum saepe vero harum voluptatibus hic incidunt dolore rem, omnis consectetur cupiditate at repudiandae.</p>
+  <button onclick="execAPICall()">
+    Hazme click primero!
+  </button>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+    const socket = io();
+
+    socket.on('button-clicked', () => {
+      document.querySelector('button').style.setProperty(
+        'display', 'none'
+      );
+    });
+
+    function execAPICall() {
+      fetch('/create', { method: 'post' })
+        .then(res => {
+          if (res.ok) return res.json();
+          throw res;
+        })
+        .then(json => console.log(json))
+        .catch(console.error);
+    }
+  </script>
+</body>
+</html>
